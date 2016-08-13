@@ -18,6 +18,11 @@ export default (app) => {
         res.json(global.streams.getActiveStreams())
     })
 
+    app.get("/api/timestamp", (req, res) => {
+        var timestamp = Math.floor((new Date()).getTime() / 1000)
+        res.json({ timestamp: timestamp })
+    })
+
     app.get("/api/:stream/:key/listeners", (req, res) => {
         if (req.params.key !== global.config.apikey) {
             res.status(400).json({error: "Invalid API key"})
